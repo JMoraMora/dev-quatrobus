@@ -9,3 +9,6 @@ stop-container:
 
 remove-container: 
 	docker container rm instance-quatrobus
+
+ssh-be: ## ssh's into the be container
+	docker exec -it instance-quatrobus bash
