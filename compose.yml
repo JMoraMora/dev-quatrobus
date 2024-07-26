@@ -1,0 +1,10 @@
+services:
+  app:
+    container_name: quatrobus
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "85:80"
+    volumes:
+      - /var/www/app-quatrobus:/var/www
