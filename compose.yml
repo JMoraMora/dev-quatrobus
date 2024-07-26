@@ -2,9 +2,18 @@ services:
   quatrobus:
     container_name: instance-quatrobus
     build: 
-      context: .
+      context: ./instance-quatrobus/
       dockerfile: Dockerfile
     ports:
       - "85:80"
     volumes:
       - /var/www/mcets/instance-quatrobus:/var/www
+  web:
+    container_name: instance-web
+    build: 
+      context: ./instance-web/
+      dockerfile: Dockerfile
+    ports:
+      - "86:80"
+    volumes:
+      - /var/www/mcets/instance-web:/var/www
