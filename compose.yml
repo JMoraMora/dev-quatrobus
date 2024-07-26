@@ -5,15 +5,49 @@ services:
       context: ./instance-quatrobus/
       dockerfile: Dockerfile
     ports:
-      - "85:80"
+      - 85:80
     volumes:
       - /var/www/mcets/instance-quatrobus:/var/www
+    networks:
+      - mcets-quatrobus-db-net
+      - mcets-api
+    depends_on:
+      - mariadb
+  mariadb:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: 280510jt
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - mcets-quatrobus-db-net
   web:
     container_name: instance-web
     build: 
       context: ./instance-web/
       dockerfile: Dockerfile
     ports:
-      - "86:80"
+      - 86:80
+      - 8080:8080
     volumes:
       - /var/www/mcets/instance-web:/var/www
+    networks:
+      - mcets-web-net
+      - mcets-api
+    depends_on:
+      - redis
+  redis:
+    image: redis:4.0.9
+    command: ["redis-server", "--requirepass", "globalbts"]
+    networks:
+      - mcets-web-net
+networks:
+  mcets-web-net:
+    driver: bridge    
+  mcets-quatrobus-db-net:
+    driver: bridge    
+  mcets-api:
+    driver: bridge    
+volumes:
+  mariadb_data:

@@ -49,17 +49,18 @@ RUN . "$NVM_DIR/nvm.sh" && nvm install 14.17.6 && nvm use 14.17.6
 RUN ln -s "/root/.nvm/versions/node/v14.17.6/bin/node" /usr/bin/node
 RUN ln -s "/root/.nvm/versions/node/v14.17.6/bin/npm" /usr/bin/npm
 
-COPY ./apache/browscap.ini         /usr/local/etc/php/browscap.ini 
+COPY ./apache/browscap.ini  /etc/php/7.2/apache2/browscap.ini 
 
 RUN sed -i "s/;browscap = extra\/browscap.ini/browscap = \/etc\/php\/7.2\/apache2\/browscap.ini/g" /etc/php/7.2/apache2/php.ini 
 RUN sed -i "s/memory_limit = 128M/memory_limit = 2048M/g" /etc/php/7.2/apache2/php.ini
 
-COPY ./apache/bts.conf     /etc/apache2/sites-available/bts.conf
-COPY ./apache/quaweb.conf  /etc/apache2/sites-available/quaweb.conf
-COPY ./apache/setenv.conf  /etc/apache2/sites-available/quaweb.conf
+COPY ./apache/bts.conf      /etc/apache2/sites-available/bts.conf
+COPY ./apache/quaweb.conf   /etc/apache2/sites-available/quaweb.conf
+COPY ./apache/setenv.conf   /etc/apache2/conf-available/setenv.conf
 
 RUN ln -s /etc/apache2/sites-available/bts.conf     /etc/apache2/sites-enabled/bts.conf
 RUN ln -s /etc/apache2/sites-available/quaweb.conf  /etc/apache2/sites-enabled/quaweb.conf
+RUN ln -s /etc/apache2/conf-available/setenv.conf   /etc/apache2/conf-enabled/setenv.conf
 
 RUN rm /etc/apache2/sites-available/000-default.conf
 RUN rm /etc/apache2/sites-enabled/000-default.conf
