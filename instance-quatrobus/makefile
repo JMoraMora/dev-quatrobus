@@ -1,11 +1,11 @@
 build:
-	docker build -t app-quatrobus .
+	docker build -t instance-quatrobus .
 
 run-container: 
-	docker run --name app-quatrobus -d -p 85:80 -v /var/www/app-quatrobus:/var/www app-quatrobus
+	docker run --name instance-quatrobus -d -p 85:80 -v /var/www/mcets/instance-quatrobus:/var/www instance-quatrobus
 
 stop-container: 
-	docker container stop app-quatrobus && docker container rm app-quatrobus
+	docker container stop instance-quatrobus && docker container rm instance-quatrobus
 
 remove-container: 
-	docker container rm app-quatrobus
+	docker container rm instance-quatrobus

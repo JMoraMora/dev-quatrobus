@@ -31,9 +31,9 @@ RUN docker-php-ext-install pdo_sqlite
 
 RUN pecl install apcu && docker-php-ext-enable apcu 
 
-COPY ./apache_conf/quatrobus.conf       /etc/apache2/sites-available/quatrobus.conf
-COPY ./apache_conf/setenv.conf          /etc/apache2/conf-available/setenv.conf
-COPY ./apache_conf/browscap.ini         /usr/local/etc/php/browscap.ini 
+COPY ./apache/quatrobus.conf       /etc/apache2/sites-available/quatrobus.conf
+COPY ./apache/setenv.conf          /etc/apache2/conf-available/setenv.conf
+COPY ./apache/browscap.ini         /usr/local/etc/php/browscap.ini 
 
 RUN ln -s /etc/apache2/sites-available/quatrobus.conf /etc/apache2/sites-enabled/quatrobus.conf
 RUN ln -s /etc/apache2/conf-available/setenv.conf /etc/apache2/conf-enabled/setenv.conf
@@ -43,7 +43,6 @@ RUN rm -f /usr/local/etc/php/php.ini-production
 
 RUN rm /etc/apache2/sites-available/000-default.conf
 RUN rm /etc/apache2/sites-enabled/000-default.conf
-RUN rm -rf /var/www/html
 
 RUN sed -i 's/^;browscap =.*/browscap = \/usr\/local\/etc\/php\/browscap.ini/' /usr/local/etc/php/php.ini
 
