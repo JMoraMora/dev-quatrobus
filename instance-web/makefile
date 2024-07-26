@@ -1,11 +1,14 @@
 build:
-	docker build -t app-mcets-web .
+	docker build -t instance-web .
 
 run-container: 
-	docker run --name app-mcets-web -d -p 86:80 -p 8080:8080 -v /var/www/app-mcets-web:/var/www app-mcets-web
+	docker run --name instance-web -d -p 86:80 -p 8080:8080 -v /var/www/mcets/instance-web:/var/www instance-web
 
 stop-container: 
-	docker container stop app-mcets-web && docker container rm app-mcets-web
+	docker container stop instance-web && docker container rm instance-web
 
 remove-container: 
-	docker container rm app-mcets-web
+	docker container rm instance-web
+
+ssh-be: ## ssh's into the be container
+	docker exec -it instance-web bash
