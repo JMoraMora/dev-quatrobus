@@ -1,6 +1,6 @@
 SERVICE_QUATROBUS = quatrobus
 SERVICE_WEB = web
-
+SERVICE_MARIADB = mariadb
 
 help: ## Show this help message
 	@echo 'usage: make [target]'
@@ -25,3 +25,15 @@ ssh-quatrobus: ## ssh's into the instance quatrobus
 
 ssh-web: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_WEB} bash
+
+ssh-mariadb: ## ssh's into the instance web
+	docker compose exec -it ${SERVICE_MARIADB} mariadb -u root -p
+
+quaweb-prepare: ## run quaweb in localhost:8080
+	docker compose exec -it ${SERVICE_WEB} npm install
+
+quaweb-run: ## run quaweb in localhost:8080
+	docker compose exec -it ${SERVICE_WEB} npm run serve
+
+quaweb-build: ## build quaweb for deploy
+	docker compose exec -it ${SERVICE_WEB} npm run build
