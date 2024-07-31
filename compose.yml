@@ -33,18 +33,8 @@ services:
     volumes:
       - /var/www/mcets/instance-web:/var/www
     networks:
-      - mcets-web-net
       - mcets-api
-    depends_on:
-      - redis
-  redis:
-    image: redis:4.0.9
-    command: ["redis-server", "--requirepass", "globalbts"]
-    networks:
-      - mcets-web-net
 networks:
-  mcets-web-net:
-    driver: bridge    
   mcets-quatrobus-db-net:
     driver: bridge    
   mcets-api:
