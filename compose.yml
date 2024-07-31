@@ -4,8 +4,6 @@ services:
     build: 
       context: ./instance-quatrobus/
       dockerfile: Dockerfile
-    ports:
-      - 85:80
     volumes:
       - /var/www/mcets/instance-quatrobus:/var/www
     networks:
@@ -30,10 +28,18 @@ services:
       context: ./instance-web/
       dockerfile: Dockerfile
     ports:
-      - 86:80
       - 8080:8080
     volumes:
       - /var/www/mcets/instance-web:/var/www
+    networks:
+      - mcets-api
+  nginx:
+    container_name: nginx
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
     networks:
       - mcets-api
 networks:

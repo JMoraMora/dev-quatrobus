@@ -14,6 +14,12 @@ up: ## Start the containers
 down: ## Stop the containers
 	docker compose down
 
+ps: ## list containers into compose
+	docker compose ps
+
+ps-all: ## list all containers into compose
+	docker compose ps -a
+
 restart: ## Restart the containers
 	$(MAKE) down && $(MAKE) up
 
