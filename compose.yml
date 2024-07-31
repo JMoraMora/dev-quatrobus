@@ -18,6 +18,8 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: 280510jt
+    ports:
+      - 33060:3306
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
