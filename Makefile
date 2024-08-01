@@ -32,6 +32,9 @@ ssh-quatrobus: ## ssh's into the instance quatrobus
 ssh-web: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_WEB} bash
 
+ssh-redis: ## ssh's into the redis from service web
+	docker compose exec -it ${SERVICE_WEB} redis-cli -a globalbts
+
 ssh-mariadb: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_MARIADB} mariadb -u root -p
 
