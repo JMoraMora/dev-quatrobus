@@ -35,7 +35,7 @@ ssh-web: ## ssh's into the instance web
 ssh-mariadb: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_MARIADB} mariadb -u root -p
 
-quaweb-prepare: ## run quaweb in localhost:8080
+quaweb-prepare: ## prepare quaweb, install node__modules
 	docker compose exec -it ${SERVICE_WEB} npm install
 
 quaweb-run: ## run quaweb in localhost:8080
