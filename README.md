@@ -3,8 +3,41 @@
 Dentro de la instancia quatrobus, seguir los pasos de confluence, guia quatrobus, solo para saber la estructura de carpetas y descargar el repositorio de quatrobus
 Dentro de la instancia web, seguir los pasos de confluence, guia phalcon, solo estructura de carpetas y descargar repositorios
 
+> Nota: Solo necesitas mapeas las estructuras de las aplicaciones dentro de las instancias como si fuesen cada una un servidor
+
+### Hosts
+
+Registrar hosts en etc apuntando al ip local
+```
+127.0.0.1	quatrobus
+127.0.0.1	quaweb.phalcon
+```
+
 ### Comandos
-Em comando make help listara los comandos necesarios para correr las aplicaciones
+El comando make help listara los comandos necesarios para correr las aplicaciones
+```
+$ make help
+usage: make [target]
+
+targets:
+help                  Show this help message                 
+up                    Start the containers                   
+down                  Stop the containers                    
+ps                    list containers into compose           
+ps-all                list all containers into compose       
+restart               Restart the containers                 
+build                 Rebuilds all the containers            
+ssh-quatrobus         ssh's into the instance quatrobus      
+ssh-web               ssh's into the instance web            
+ssh-mariadb           ssh's into the instance web            
+quaweb-prepare        prepare quaweb, install node__modules  
+quaweb-run            run quaweb in localhost                8080
+quaweb-build          build quaweb for deploy   
+```
+
+Por primera vez lo que necesitas ejecutar es `make build` para construir los servicios. Luego los comandos mas usados seran `make up`, `make down`, `make quaweb-run` y `make quaweb-build`. Cada una de estas indican su uso en la descripcion.
+
+### Archivos de configuracion por aplicacion
 
 **quatrobus**
 ``` php
