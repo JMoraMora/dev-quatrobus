@@ -57,5 +57,3 @@ RUN docker-php-ext-install opcache
 
 VOLUME /var/www
 WORKDIR /var/www
-
-EXPOSE 80

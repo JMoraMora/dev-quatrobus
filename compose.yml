@@ -9,6 +9,7 @@ services:
     networks:
       - mcets-quatrobus-db-net
       - mcets-api
+      - revert-proxy
     depends_on:
       - mariadb
   mariadb:
@@ -33,6 +34,7 @@ services:
       - /var/www/mcets/instance-web:/var/www
     networks:
       - mcets-api
+      - revert-proxy
   nginx:
     container_name: nginx
     build: 
@@ -41,11 +43,16 @@ services:
     ports:
       - 80:80
     networks:
-      - mcets-api
+      - revert-proxy
+    depends_on:
+      - quatrobus
+      - web
 networks:
   mcets-quatrobus-db-net:
     driver: bridge    
   mcets-api:
+    driver: bridge    
+  revert-proxy:
     driver: bridge    
 volumes:
   mariadb_data:
