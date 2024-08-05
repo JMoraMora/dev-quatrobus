@@ -11,15 +11,15 @@ server {
     }
 }
 
-# server {
-#     listen ${NGINX_PORT};
-#     server_name ${DOMINIO2};
+server {
+    listen ${NGINX_PORT};
+    server_name ${DOMINIO_QUAWEB};
 
-#     location / {
-#         proxy_pass http://${SERVICIO2};
-#         proxy_set_header Host $host;
-#         proxy_set_header X-Real-IP $remote_addr;
-#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#         proxy_set_header X-Forwarded-Proto $scheme;
-#     }
-# }
+    location / {
+        proxy_pass http://${SERVICIO_WEB};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

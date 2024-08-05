@@ -69,8 +69,12 @@ RUN apt-get update && apt-get install -y redis-server
 RUN sed -i 's/^# requirepass .*/requirepass globalbts/' /etc/redis/redis.conf
 
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+
+RUN apt-get install -y dos2unix
+RUN dos2unix /usr/local/bin/entrypoint.sh
+
+RUN chmod 777 /usr/local/bin/entrypoint.sh
 
 WORKDIR /var/www/mcets/QUAWEB/vuefrontend
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
