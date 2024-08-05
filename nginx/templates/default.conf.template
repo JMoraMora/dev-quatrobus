@@ -1,0 +1,25 @@
+server {
+    listen ${NGINX_PORT};
+    server_name ${DOMINIO_QUATROBUS};
+
+    location / {
+        proxy_pass http://${SERVICIO_QUATROBUS};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+# server {
+#     listen ${NGINX_PORT};
+#     server_name ${DOMINIO2};
+
+#     location / {
+#         proxy_pass http://${SERVICIO2};
+#         proxy_set_header Host $host;
+#         proxy_set_header X-Real-IP $remote_addr;
+#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#         proxy_set_header X-Forwarded-Proto $scheme;
+#     }
+# }
