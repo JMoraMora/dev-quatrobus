@@ -37,6 +37,52 @@ quaweb-build          build quaweb for deploy
 
 Por primera vez lo que necesitas ejecutar es `make build` para construir los servicios. Luego los comandos mas usados seran `make up`, `make down`, `make quaweb-run` y `make quaweb-build`. Cada una de estas indican su uso en la descripcion.
 
+### Instancia Quatrobus
+```
+git clone git@bitbucket.org:mcets/quatrobus.git
+
+mkdir quatrobus/3.2/application/cache
+mkdir quatrobus/3.2/application/logs
+chmod g+r quatrobus/3.2/application/cache quatrobus/3.2/application/logs
+
+mkdir quatrobus/3.2/upload
+mkdir quatrobus/3.2/upload/barcode
+mkdir quatrobus/3.2/upload/qr_manual
+mkdir quatrobus/3.2/upload/qr_package
+mkdir quatrobus/3.2/upload/qr_ticket
+mkdir quatrobus/3.2/upload/ticket
+```
+
+### Instancia Web
+```
+git clone git@bitbucket.org:mcets/bts_v2.git
+
+mv bts_v2 bts.phalcon
+
+mkdir bts.phalcon/app/cache/compiled_views/BTS
+mkdir bts.phalcon/app/cache/compiled_views/QUAWEB
+
+mkdir mcets
+mkdir mcets.upload
+mkdir mcets.logs
+
+cp -r bts.phalcon/project_example mcets/project_example
+mv mcets/project_example mcets/BTS
+
+git clone git@bitbucket.org:mcets/quaweb.git mcets/quaweb
+mv mcets/quaweb mcets/QUAWEB
+
+mkdir phalcon.modules
+mkdir phalcon.modules/jose
+mkdir phalcon.modules/mpdf
+mkdir phalcon.modules/swiftmailer
+mkdir phalcon.modules/authorizenet-sdk
+mkdir phalcon.modules/paypal-sdk
+mkdir phalcon.modules/paypalnvp-sdk
+mkdir phalcon.modules/culqi-sdk
+
+```
+
 ### Archivos de configuracion por aplicacion
 
 **quatrobus**

@@ -11,9 +11,16 @@ RUN apt-get install libssl-dev -y
 RUN apt-get install libtidy-dev -y
 RUN apt-get install libsnmp-dev -y
 
-RUN apt install -y curl
+RUN apt-get update -y
+RUN apt-get install -y apt-transport-https ca-certificates
+
+# Añadir repositorio debian buster-updates
+RUN echo "deb http://deb.debian.org/debian buster-updates main" > /etc/apt/sources.list.d/buster-updates.list
+RUN echo "deb http://security.debian.org/debian-security buster/updates main" > /etc/apt/sources.list.d/debian-security.list
+
 RUN apt install -y libcurl4
 RUN apt install -y libcurl3-dev
+RUN apt install -y curl
 RUN a2enmod filter rewrite cache cache_disk deflate expires headers ssl 
 
 RUN docker-php-ext-install gettext
