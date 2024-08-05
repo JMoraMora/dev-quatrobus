@@ -49,6 +49,15 @@ RUN . "$NVM_DIR/nvm.sh" && nvm install 14.17.6 && nvm use 14.17.6
 RUN ln -s "/root/.nvm/versions/node/v14.17.6/bin/node" /usr/bin/node
 RUN ln -s "/root/.nvm/versions/node/v14.17.6/bin/npm" /usr/bin/npm
 
+RUN sed -i 's/^;date.timezone =/date.timezone = "America\/Chicago"/' /etc/php/7.2/apache2/php.ini
+RUN sed -i 's/^display_errors = Off/display_errors = On/' /etc/php/7.2/apache2/php.ini
+RUN sed -i 's/^;error_log =/error_log = \/var\/log\/php_errors.log/' /etc/php/7.2/apache2/php.ini
+RUN sed -i 's/^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/' /etc/php/7.2/apache2/php.ini
+RUN sed -i 's/^;session.gc_maxlifetime = 1440/session.gc_maxlifetime = 28800/' /etc/php/7.2/apache2/php.ini
+RUN sed -i 's/^;session.cache_expire = 180/session.cache_expire = 480/' /etc/php/7.2/apache2/php.ini
+
+RUN apt-get install -y --force-yes vim 
+
 COPY ./apache/browscap.ini  /etc/php/7.2/apache2/browscap.ini 
 
 RUN sed -i "s/;browscap = extra\/browscap.ini/browscap = \/etc\/php\/7.2\/apache2\/browscap.ini/g" /etc/php/7.2/apache2/php.ini 
