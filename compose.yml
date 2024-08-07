@@ -35,6 +35,9 @@ services:
     networks:
       - mcets-api
       - revert-proxy
+      - mcets-web-redis-net
+    depends_on:
+      - redis
   nginx:
     container_name: nginx
     build: 
@@ -53,6 +56,13 @@ services:
     depends_on:
       - quatrobus
       - web
+  redis:
+    image: redis:4.0.9
+    command: ["redis-server", "--requirepass", "globalbts"]
+    # ports:
+    #   - 6379:6379
+    networks:
+      - mcets-web-redis-net
 networks:
   mcets-quatrobus-db-net:
     driver: bridge    
@@ -60,5 +70,7 @@ networks:
     driver: bridge    
   revert-proxy:
     driver: bridge    
+  mcets-web-redis-net:
+    driver: bridge
 volumes:
   mariadb_data:

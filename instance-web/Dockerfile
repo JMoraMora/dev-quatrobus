@@ -74,16 +74,17 @@ RUN ln -s /etc/apache2/conf-available/setenv.conf   /etc/apache2/conf-enabled/se
 RUN rm /etc/apache2/sites-available/000-default.conf
 RUN rm /etc/apache2/sites-enabled/000-default.conf
 
-RUN apt-get update && apt-get install -y redis-server
-RUN sed -i 's/^# requirepass .*/requirepass globalbts/' /etc/redis/redis.conf
+# RUN apt-get update && apt-get install -y redis-server
+# RUN sed -i 's/^# requirepass .*/requirepass globalbts/' /etc/redis/redis.conf
 
-COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+# COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN apt-get install -y dos2unix
-RUN dos2unix /usr/local/bin/entrypoint.sh
+# RUN apt-get install -y dos2unix
+# RUN dos2unix /usr/local/bin/entrypoint.sh
 
-RUN chmod 777 /usr/local/bin/entrypoint.sh
+# RUN chmod 777 /usr/local/bin/entrypoint.sh
 
 WORKDIR /var/www/mcets/QUAWEB/vuefrontend
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+# ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
