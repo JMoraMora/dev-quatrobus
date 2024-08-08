@@ -1,6 +1,7 @@
 SERVICE_QUATROBUS = quatrobus
 SERVICE_WEB = web
 SERVICE_MARIADB = mariadb
+SERVICE_REDIS = redis
 
 help: ## Show this help message
 	@echo 'usage: make [target]'
@@ -33,7 +34,7 @@ ssh-web: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_WEB} bash
 
 ssh-redis: ## ssh's into the redis from service web
-	docker compose exec -it ${SERVICE_WEB} redis-cli -a globalbts
+	docker compose exec -it ${SERVICE_REDIS} redis-cli -a globalbts
 
 ssh-mariadb: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_MARIADB} mariadb -u root -p
