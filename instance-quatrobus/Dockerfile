@@ -62,5 +62,11 @@ RUN sed -i 's/^;session.cache_expire = 180/session.cache_expire = 480/' /usr/loc
 
 RUN docker-php-ext-install opcache
 
+RUN curl -sSLf \
+        -o /usr/local/bin/install-php-extensions \
+        https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
+    chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions xdebug
+
 VOLUME /var/www
 WORKDIR /var/www

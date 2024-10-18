@@ -58,6 +58,9 @@ RUN sed -i 's/^;session.cache_expire = 180/session.cache_expire = 480/' /etc/php
 
 RUN apt-get install -y --force-yes vim 
 
+RUN apt-get update
+RUN apt-get install -y php-xdebug
+
 COPY ./apache/browscap.ini  /etc/php/7.2/apache2/browscap.ini 
 
 RUN sed -i "s/;browscap = extra\/browscap.ini/browscap = \/etc\/php\/7.2\/apache2\/browscap.ini/g" /etc/php/7.2/apache2/php.ini 
