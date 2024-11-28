@@ -4,3 +4,5 @@ instance-quatrobus/mcets.*/
 instance-web/bts.phalcon
 instance-web/phalcon.modules
 instance-web/mcets*/
+
+instance-quatrobus/qmonitor
