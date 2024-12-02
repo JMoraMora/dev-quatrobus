@@ -38,6 +38,22 @@ services:
       - mcets-web-redis-net
     depends_on:
       - redis
+  monitor:
+    container_name: instance-qmonitor
+    build:
+      context: ./instance-qmonitor/
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+      - 5173:5173
+    volumes:
+      - /var/www/mcets/instance-qmonitor:/var/www
+    networks:
+      - mcets-api
+      - revert-proxy
+      - mcets-quatrobus-db-net
+    depends_on:
+      - mariadb
   nginx:
     container_name: nginx
     build: 
