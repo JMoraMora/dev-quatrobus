@@ -30,6 +30,9 @@ build: ## Rebuilds all the containers
 
 ssh-quatrobus: ## ssh's into the instance quatrobus
 	docker compose exec -it ${SERVICE_QUATROBUS} bash
+	
+ssh-qmonitor: ## ssh's into the instance qmonitor
+	docker compose exec -it ${SERVICE_MONITOR} bash
 
 ssh-web: ## ssh's into the instance web
 	docker compose exec -it ${SERVICE_WEB} bash
